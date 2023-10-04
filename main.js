@@ -1,6 +1,6 @@
 window.onload=function() {
     var canvas = document.getElementById("canvas"),
-    context = canvas.getContext("2d"),
+    ctx = canvas.getContext("2d"),
     width = canvas.width = window.innerWidth,
     height = canvas.height = window.innerHeight;
 
@@ -12,23 +12,32 @@ window.onload=function() {
     yangle = 4,
     xspeed = 0.12,
     yspeed = 0.12,
-    x,y;
+    x,y,
+    fps=0.0,start_time=performance.now(),frames=0;
+    
+   render();    
 
-    render();
-
-    function render() {
-        
+    function render() {        
         x = centerX + Math.cos(xangle) * xRadius, 
-        y = centerY + Math.sin(yangle) * yRadius;
-        
-        context.fillStyle = "deepskyblue";
-        context.fillRect(0,0,width,height);
-        context.beginPath();
-        context.arc(x,y,25,0,Math.PI * 2,false);
-        context.fillStyle="yellow";
-        context.fill();
+        y = centerY + Math.sin(yangle) * yRadius;        
+        ctx.fillStyle = "gray";
+        ctx.fillRect(0,0,width,height);
+        ctx.beginPath();
+        ctx.arc(x,y,20,0,Math.PI * 2,false);
+        ctx.fillStyle="orange";
+        ctx.fill();
         xangle += xspeed;
-        yangle += yspeed;
-        requestAnimationFrame(render);
+        yangle += yspeed;            
+        ctx.font = "26px serif";
+        ctx.fillStyle = "red";        
+        ctx.fillText("FPS : " + fps,10,26);
+        total_time = performance.now() - start_time;        
+        frames++;
+        if (total_time>999) 
+        {            
+            fps = frames;
+            frames = 0; start_time = performance.now();
+        }              
+        requestAnimationFrame(render);        
     }
 };
