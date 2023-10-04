@@ -6,12 +6,12 @@ window.onload=function() {
 
     var centerX = width / 2,
     centerY = height / 2,
-    xRadius = 300,
-    yRadius = 300,
+    xRadius = 200,
+    yRadius = 200,
     xangle = 4,
     yangle = 4,
-    xspeed = 0.04,
-    yspeed = 0.04,
+    xspeed = 0.12,
+    yspeed = 0.12,
     x,y;
 
     render();
